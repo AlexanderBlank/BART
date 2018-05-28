@@ -115,12 +115,12 @@ private:
    user input.
    \return shared_ptr pointing to EquationBase instance.
    */
-  std_cxx11::shared_ptr<EquationBase<dim> > build_equation
+  std::shared_ptr<EquationBase<dim> > build_equation
   (std::string equation_name,
    const ParameterHandler &prm,
-   const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
-   const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
-   const std_cxx11::shared_ptr<MaterialProperties> mat_ptr);
+   const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+   const std::shared_ptr<AQBase<dim> > aqd_ptr,
+   const std::shared_ptr<MaterialProperties> mat_ptr);
   
   //! Function used to build pointer to instance of AQBase's derived class
   /*!
@@ -133,7 +133,7 @@ private:
    user input.
    \return shared_ptr pointing to AQBase instance.
    */
-  std_cxx11::shared_ptr<AQBase<dim> > build_aq_model (ParameterHandler &prm);
+  std::shared_ptr<AQBase<dim> > build_aq_model (ParameterHandler &prm);
   
   //! Function used to build pointer to instance of EigenBase's derived class
   /*!
@@ -146,13 +146,13 @@ private:
    user input.
    \return shared_ptr pointing to EigenBase instance.
    */
-  std_cxx11::shared_ptr<EigenBase<dim> > build_eigen_iterations (const ParameterHandler &prm);
+  std::shared_ptr<EigenBase<dim> > build_eigen_iterations (const ParameterHandler &prm);
   
   //! Function used to build pointer to instance of MGBase's derived class
-  std_cxx11::shared_ptr<MGBase<dim> > build_mg_iterations (const ParameterHandler &prm);
+  std::shared_ptr<MGBase<dim> > build_mg_iterations (const ParameterHandler &prm);
   
   //! Function used to build pointer to instance of InGroupBase's derived class
-  std_cxx11::shared_ptr<IGBase<dim> > build_ig_iterations (const ParameterHandler &prm);
+  std::shared_ptr<IGBase<dim> > build_ig_iterations (const ParameterHandler &prm);
   
   //! Finite element type.
   /*!
@@ -193,13 +193,13 @@ private:
   ConstraintMatrix constraints;
   ConditionalOStream pcout;//!< Conditional ostream, i.e. ostream on one processor.
   
-  std_cxx11::shared_ptr<Iterations<dim> > itr_ptr;//!< Pointer of Iterations instance.
-  std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr;//!< Pointer of MeshGenerator instance.
-  std_cxx11::shared_ptr<MaterialProperties> mat_ptr;//!< Pointer of MaterialProperties instance.
-  std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr;//!< Pointer of AQBase instance.
-  std_cxx11::shared_ptr<EigenBase<dim> > eig_ptr;//!< Pointer of EigenBase instance.
-  std_cxx11::shared_ptr<MGBase<dim> > mg_ptr;//!< Pointer of MGBase instance.
-  std_cxx11::shared_ptr<IGBase<dim> > ig_ptr;//!< Pointer of InGroupBase instance.
+  std::shared_ptr<Iterations<dim> > itr_ptr;//!< Pointer of Iterations instance.
+  std::shared_ptr<MeshGenerator<dim> > msh_ptr;//!< Pointer of MeshGenerator instance.
+  std::shared_ptr<MaterialProperties> mat_ptr;//!< Pointer of MaterialProperties instance.
+  std::shared_ptr<AQBase<dim> > aqd_ptr;//!< Pointer of AQBase instance.
+  std::shared_ptr<EigenBase<dim> > eig_ptr;//!< Pointer of EigenBase instance.
+  std::shared_ptr<MGBase<dim> > mg_ptr;//!< Pointer of MGBase instance.
+  std::shared_ptr<IGBase<dim> > ig_ptr;//!< Pointer of InGroupBase instance.
   
   //! A vector of pointers of EquationBase instances.
   /*!
@@ -207,7 +207,7 @@ private:
    model. Otherwise, std::vector::front() contains the pointer of HO equation and
    std::vector::back() contains the pointer of NDA equation.
    */
-  std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > equ_ptrs;
+  std::vector<std::shared_ptr<EquationBase<dim> > > equ_ptrs;
   
   std::string transport_model;//!< Name of transport model.
   std::string ho_linear_solver_name;//!< Algebraic solver name.

@@ -18,9 +18,9 @@ EigenBase<dim>::~EigenBase ()
 template <int dim>
 void EigenBase<dim>::do_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr,
- std_cxx11::shared_ptr<MGBase<dim> > mg_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr,
+ std::shared_ptr<MGBase<dim> > mg_ptr)
 {
   if (!this->do_nda)
   {
@@ -36,7 +36,7 @@ void EigenBase<dim>::do_iterations
 template <int dim>
 void EigenBase<dim>::initialize_fiss_process
 (std::vector<Vector<double> > &sflxes_proc,
- std_cxx11::shared_ptr<EquationBase<dim> > &equ_ptr)
+ std::shared_ptr<EquationBase<dim> > &equ_ptr)
 {
   // calculate fission source based on initial scalar fluxes
   fiss_src = equ_ptr->estimate_fiss_src (sflxes_proc);
@@ -48,9 +48,9 @@ void EigenBase<dim>::initialize_fiss_process
 template <int dim>
 void EigenBase<dim>::eigen_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr,
- std_cxx11::shared_ptr<MGBase<dim> > mg_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr,
+ std::shared_ptr<MGBase<dim> > mg_ptr)
 {
 }
 
@@ -70,7 +70,7 @@ void EigenBase<dim>::update_prev_sflxes_fiss_src_keff
 template <int dim>
 void EigenBase<dim>::calculate_fiss_src_keff
 (std::vector<Vector<double> > &sflxes_proc,
- std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr)
+ std::shared_ptr<EquationBase<dim> > equ_ptr)
 {
   fiss_src = equ_ptr->estimate_fiss_src (sflxes_proc);
   keff = estimate_k ();

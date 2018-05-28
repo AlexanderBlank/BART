@@ -49,10 +49,10 @@ public:
    */
   void solve_problems
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr,
-   std_cxx11::shared_ptr<MGBase<dim> > mg_ptr,
-   std_cxx11::shared_ptr<EigenBase<dim> > eig_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr,
+   std::shared_ptr<MGBase<dim> > mg_ptr,
+   std::shared_ptr<EigenBase<dim> > eig_ptr);
 
 private:
   const std::string transport_name;//!< HO equation name.

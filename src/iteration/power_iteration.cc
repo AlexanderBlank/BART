@@ -15,9 +15,9 @@ PowerIteration<dim>::~PowerIteration ()
 template <int dim>
 void PowerIteration<dim>::eigen_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr,
- std_cxx11::shared_ptr<MGBase<dim> > mg_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr,
+ std::shared_ptr<MGBase<dim> > mg_ptr)
 {
   double err_k = 1.0;
   double err_phi = 1.0;

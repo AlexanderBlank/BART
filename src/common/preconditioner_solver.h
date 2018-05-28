@@ -109,25 +109,25 @@ private:
    to show number of linear iterations in the algebraic solve, linear solver residual
    after each iteration etc.
    */
-  std_cxx11::shared_ptr<SolverControl> cn;
+  std::shared_ptr<SolverControl> cn;
 
   //! A vector of pointers of <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classPETScWrappers_1_1PreconditionBoomerAMG.html" style="color:blue"><b>BoomerAMG</b></a> preconditioner.
-  std::vector<std_cxx11::shared_ptr<PETScWrappers::PreconditionBoomerAMG> > pre_amg;
+  std::vector<std::shared_ptr<PETScWrappers::PreconditionBoomerAMG> > pre_amg;
   
   //! A vector of pointers of <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classPETScWrappers_1_1PreconditionBlockJacobi.html" style="color:blue"><b>block Jacobi</b></a> preconditioner.
-  std::vector<std_cxx11::shared_ptr<PETScWrappers::PreconditionBlockJacobi> > pre_bjacobi;
+  std::vector<std::shared_ptr<PETScWrappers::PreconditionBlockJacobi> > pre_bjacobi;
   
   //! A vector of pointers of <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classPETScWrappers_1_1PreconditionParaSails.html" style="color:blue"><b>ParaSails</b></a> preconditioner.
-  std::vector<std_cxx11::shared_ptr<PETScWrappers::PreconditionParaSails> > pre_parasails;
+  std::vector<std::shared_ptr<PETScWrappers::PreconditionParaSails> > pre_parasails;
   
   //! A vector of pointers of <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classPETScWrappers_1_1PreconditionJacobi.html" style="color:blue"><b>Jacobi</b></a> preconditioner.
-  std::vector<std_cxx11::shared_ptr<PETScWrappers::PreconditionJacobi> > pre_jacobi;
+  std::vector<std::shared_ptr<PETScWrappers::PreconditionJacobi> > pre_jacobi;
   
   //! A vector of pointers of <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classPETScWrappers_1_1PreconditionEisenstat.html" style="color:blue"><b>Eisenstat</b></a> (block SSOR) preconditioner.
-  std::vector<std_cxx11::shared_ptr<PETScWrappers::PreconditionEisenstat> > pre_eisenstat;
+  std::vector<std::shared_ptr<PETScWrappers::PreconditionEisenstat> > pre_eisenstat;
   
   //! A vector of pointers of <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classPETScWrappers_1_1SparseDirectMUMPS.html" style="color:blue"><b>MUMPS</b></a> solver objects.
-  std::vector<std_cxx11::shared_ptr<PETScWrappers::SparseDirectMUMPS> > direct;
+  std::vector<std::shared_ptr<PETScWrappers::SparseDirectMUMPS> > direct;
 };
 
 #endif //__preconditioner_solver_h__

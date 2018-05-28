@@ -29,21 +29,21 @@ public:
    */
   virtual void do_iterations
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr,
-   std_cxx11::shared_ptr<MGBase<dim> > mg_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr,
+   std::shared_ptr<MGBase<dim> > mg_ptr);
   
   /*!
    This virtual function performs eigenvalue iteration after overriding with the
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > >::back().
+   std::vector<std::shared_ptr<EquationBase<dim> > >::back().
    
    \return Void.
    */
   virtual void eigen_iterations
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr,
-   std_cxx11::shared_ptr<MGBase<dim> > mg_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr,
+   std::shared_ptr<MGBase<dim> > mg_ptr);
   
   /*!
    Function to update \f$\phi\f$, fission source and \f$k_\mathrm{eff}\f$ from
@@ -75,7 +75,7 @@ protected:
    */
   void initialize_fiss_process
   (std::vector<Vector<double> > &sflxes_proc,
-   std_cxx11::shared_ptr<EquationBase<dim> > &equ_ptr);
+   std::shared_ptr<EquationBase<dim> > &equ_ptr);
   
   /*!
    Function to estimate fission source and \f$k_\mathrm{eff}\f$ values.
@@ -85,7 +85,7 @@ protected:
    */
   void calculate_fiss_src_keff
   (std::vector<Vector<double> > &sflxes_proc,
-   std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr);
+   std::shared_ptr<EquationBase<dim> > equ_ptr);
   
   /*!
    Function to calculate \f$k_\mathrm{eff}\f$.

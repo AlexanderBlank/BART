@@ -41,8 +41,8 @@ public:
    */
   virtual void do_iterations
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr);
   
   /*!
    A virtual function performing MG iterations. By default, it will call
@@ -65,8 +65,8 @@ public:
    */
   virtual void mg_iterations
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr);
   
   /*!
    This virtual function performs energy solves over nonthermal groups.
@@ -81,8 +81,8 @@ public:
    */
   virtual void nonthermal_solves
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr);
   
   /*!
    This virtual function performs iterative energy solves over thermal groups.
@@ -97,8 +97,8 @@ public:
    */
   virtual void thermal_iterations
   (std::vector<Vector<double> > &sflxes_proc,
-   std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
-   std_cxx11::shared_ptr<IGBase<dim> > ig_ptr);
+   std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+   std::shared_ptr<IGBase<dim> > ig_ptr);
 protected:
   unsigned int g_thermal;//!< Starting group index where upscattering exists.
   const double err_phi_tol;//!< Multigroup iteration tolerance for convergence check.

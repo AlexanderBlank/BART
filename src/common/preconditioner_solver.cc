@@ -51,7 +51,7 @@ void PreconditionerSolver::initialize_preconditioners
       pre_amg.resize (n_total_vars);
       for (unsigned int i=0; i<n_total_vars; ++i)
       {
-        pre_amg[i] = (std_cxx11::shared_ptr<PETScWrappers::PreconditionBoomerAMG>
+        pre_amg[i] = (std::shared_ptr<PETScWrappers::PreconditionBoomerAMG>
                          (new PETScWrappers::PreconditionBoomerAMG));
         PETScWrappers::PreconditionBoomerAMG::AdditionalData data;
         if (equation_name=="fo" || equation_name=="nda" ||
@@ -67,7 +67,7 @@ void PreconditionerSolver::initialize_preconditioners
       pre_bjacobi.resize (n_total_vars);
       for (unsigned int i=0; i<n_total_vars; ++i)
       {
-        pre_bjacobi[i] = std_cxx11::shared_ptr<PETScWrappers::PreconditionBlockJacobi>
+        pre_bjacobi[i] = std::shared_ptr<PETScWrappers::PreconditionBlockJacobi>
         (new PETScWrappers::PreconditionBlockJacobi);
         pre_bjacobi[i]->initialize(*sys_mats[i]);
       }
@@ -77,7 +77,7 @@ void PreconditionerSolver::initialize_preconditioners
       pre_jacobi.resize (n_total_vars);
       for (unsigned int i=0; i<n_total_vars; ++i)
       {
-        pre_jacobi[i] = std_cxx11::shared_ptr<PETScWrappers::PreconditionJacobi>
+        pre_jacobi[i] = std::shared_ptr<PETScWrappers::PreconditionJacobi>
         (new PETScWrappers::PreconditionJacobi);
         pre_jacobi[i]->initialize(*sys_mats[i]);
       }
@@ -87,7 +87,7 @@ void PreconditionerSolver::initialize_preconditioners
       pre_eisenstat.resize (n_total_vars);
       for (unsigned int i=0; i<n_total_vars; ++i)
       {
-        pre_eisenstat[i] = std_cxx11::shared_ptr<PETScWrappers::PreconditionEisenstat>
+        pre_eisenstat[i] = std::shared_ptr<PETScWrappers::PreconditionEisenstat>
         (new PETScWrappers::PreconditionEisenstat);
         PETScWrappers::PreconditionEisenstat::AdditionalData data(ssor_omega);
         pre_eisenstat[i]->initialize(*sys_mats[i], data);
@@ -98,7 +98,7 @@ void PreconditionerSolver::initialize_preconditioners
       pre_parasails.resize (n_total_vars);
       for (unsigned int i=0; i<n_total_vars; ++i)
       {
-        pre_parasails[i] = (std_cxx11::shared_ptr<PETScWrappers::PreconditionParaSails>
+        pre_parasails[i] = (std::shared_ptr<PETScWrappers::PreconditionParaSails>
                                (new PETScWrappers::PreconditionParaSails));
         if (equation_name=="fo" ||
             (equation_name=="ep" && have_reflective_bc))
@@ -121,7 +121,7 @@ void PreconditionerSolver::initialize_preconditioners
   }
   // TODO: find a better way for solver control
   // initialize solver control
-  cn = std_cxx11::shared_ptr<SolverControl>
+  cn = std::shared_ptr<SolverControl>
   (new SolverControl(sys_rhses.back()->size(), sys_rhses.back()->size()*1.0e-12));
 }
 
@@ -211,7 +211,7 @@ void PreconditionerSolver::linear_algebra_solve
     // if the solvers have not been initilized yet
     if (!direct_init[i])
     {
-      direct[i] = std_cxx11::shared_ptr<PETScWrappers::SparseDirectMUMPS>
+      direct[i] = std::shared_ptr<PETScWrappers::SparseDirectMUMPS>
       (new PETScWrappers::SparseDirectMUMPS(*cn, MPI_COMM_WORLD));
       if (equation_name=="fo" ||
           (equation_name=="ep" && have_reflective_bc))

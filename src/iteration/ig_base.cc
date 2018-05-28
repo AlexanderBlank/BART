@@ -16,7 +16,7 @@ IGBase<dim>::~IGBase ()
 template <int dim>
 void IGBase<dim>::solve_in_group
 (std::vector<Vector<double> > &sflxes_proc,
- std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr,
+ std::shared_ptr<EquationBase<dim> > equ_ptr,
  unsigned int &g)
 {
   // the default is for diffusion like system, SPN and PN
@@ -38,7 +38,7 @@ SourceIteration<dim>::~SourceIteration ()
 template <int dim>
 void SourceIteration<dim>::solve_in_group
 (std::vector<Vector<double> > &sflxes_proc,
- std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr,
+ std::shared_ptr<EquationBase<dim> > equ_ptr,
  unsigned int &g)
 {
   double err = 1.0;

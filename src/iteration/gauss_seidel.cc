@@ -15,8 +15,8 @@ GaussSeidel<dim>::~GaussSeidel ()
 template <int dim>
 void GaussSeidel<dim>::nonthermal_solves
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr)
 {
   // loop over all nonthermal groups, assemble and solve one by one
   for (unsigned int g=0; g<this->g_thermal; ++g)
@@ -29,8 +29,8 @@ void GaussSeidel<dim>::nonthermal_solves
 template <int dim>
 void GaussSeidel<dim>::thermal_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr)
 {
   double err = 1.0;
   while (err>this->err_phi_tol)

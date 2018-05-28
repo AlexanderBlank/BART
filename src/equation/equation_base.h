@@ -60,9 +60,9 @@ public:
    */
   EquationBase (std::string equation_name,
                 const ParameterHandler &prm,
-                const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
-                const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
-                const std_cxx11::shared_ptr<MaterialProperties> mat_ptr);
+                const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+                const std::shared_ptr<AQBase<dim> > aqd_ptr,
+                const std::shared_ptr<MaterialProperties> mat_ptr);
   
   /*!
    Virtual class destructor.
@@ -112,7 +112,7 @@ public:
    \return Void.
    */
   virtual void assemble_closure_bilinear_form
-  (std_cxx11::shared_ptr<EquationBase<dim> > ho_equ_ptr,
+  (std::shared_ptr<EquationBase<dim> > ho_equ_ptr,
    bool do_assembly = true);
   
   /*!
@@ -441,7 +441,7 @@ public:
    \return Void.
    */
   void initialize_cell_iterators_this_proc
-  (const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
+  (const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
    const DoFHandler<dim> &dof_handler);
   
   /*!
@@ -491,16 +491,16 @@ protected:
   
   // "c" in the following quantities means "correction" for NDA use
   //!< Pointer of quadrature rule in cell.
-  std_cxx11::shared_ptr<QGauss<dim> > q_rule;
+  std::shared_ptr<QGauss<dim> > q_rule;
   
   //!< Pointer of quadrature rule on cell face.
-  std_cxx11::shared_ptr<QGauss<dim-1> > qf_rule;
+  std::shared_ptr<QGauss<dim-1> > qf_rule;
   
   //!< Pointer of quadrature rule in cell for NDA correction term.
-  std_cxx11::shared_ptr<QGauss<dim> > qc_rule;
+  std::shared_ptr<QGauss<dim> > qc_rule;
   
   //!< Pointer of quadrature rule on cell face for NDA correction term.
-  std_cxx11::shared_ptr<QGauss<dim-1> > qfc_rule;
+  std::shared_ptr<QGauss<dim-1> > qfc_rule;
   
   //! Pointer of FEValues object.
   /*!
@@ -509,19 +509,19 @@ protected:
    ="https://www.dealii.org/8.5.0/doxygen/deal.II/classFEValuesBase.html" 
    style="color:blue"><b>FEValues page</b></a>.
    */
-  std_cxx11::shared_ptr<FEValues<dim> > fv;
+  std::shared_ptr<FEValues<dim> > fv;
   
   //! Pointer of FEFaceValues object.
-  std_cxx11::shared_ptr<FEFaceValues<dim> > fvf;
+  std::shared_ptr<FEFaceValues<dim> > fvf;
   
   //! Pointer of FEFaceValues object used in DFEM interface bilinear form assembly.
-  std_cxx11::shared_ptr<FEFaceValues<dim> > fvf_nei;
+  std::shared_ptr<FEFaceValues<dim> > fvf_nei;
   
   //! Pointer of FEValues object for NDA cell correction evaluation and assembly.
-  std_cxx11::shared_ptr<FEValues<dim> > fvc;
+  std::shared_ptr<FEValues<dim> > fvc;
   
   //! Pointer of FEFaceValues object for NDA face correction evaluation and assembly.
-  std_cxx11::shared_ptr<FEFaceValues<dim> > fvfc;
+  std::shared_ptr<FEFaceValues<dim> > fvfc;
   
   std::string equation_name;//!< String for equation name.
   std::string discretization;//!< String for spatial discretization.
@@ -634,12 +634,12 @@ private:
    \param mat_ptr Pointer of MaterialProperties object.
    \return Void.
    */
-  void process_input (const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
-                      const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
-                      const std_cxx11::shared_ptr<MaterialProperties> mat_ptr);
+  void process_input (const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+                      const std::shared_ptr<AQBase<dim> > aqd_ptr,
+                      const std::shared_ptr<MaterialProperties> mat_ptr);
   
   //! Pointer of PreconditionerSolver object serving as linear solve facility.
-  std_cxx11::shared_ptr<PreconditionerSolver> alg_ptr;
+  std::shared_ptr<PreconditionerSolver> alg_ptr;
   
   //! System matrices for bilinear forms of all components.
   std::vector<PETScWrappers::MPI::SparseMatrix*> sys_mats;

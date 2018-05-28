@@ -22,8 +22,8 @@ MGBase<dim>::~MGBase ()
 template <int dim>
 void MGBase<dim>::do_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr)
 {
   // this function will be called only when it's not an eigenvalue problem. Copy
   // the following assertion in ALL derived class of MGBase.
@@ -52,8 +52,8 @@ void MGBase<dim>::do_iterations
 template <int dim>
 void MGBase<dim>::mg_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr)
 {// this function needs to be overridden if JFNK is desired
   if (this->do_nda)
     AssertThrow (equ_ptrs.back()->get_equ_name()=="nda" &&
@@ -68,16 +68,16 @@ void MGBase<dim>::mg_iterations
 template <int dim>
 void MGBase<dim>::nonthermal_solves
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr)
 {
 }
 
 template <int dim>
 void MGBase<dim>::thermal_iterations
 (std::vector<Vector<double> > &sflxes_proc,
- std::vector<std_cxx11::shared_ptr<EquationBase<dim> > > &equ_ptrs,
- std_cxx11::shared_ptr<IGBase<dim> > ig_ptr)
+ std::vector<std::shared_ptr<EquationBase<dim> > > &equ_ptrs,
+ std::shared_ptr<IGBase<dim> > ig_ptr)
 {
 }
 

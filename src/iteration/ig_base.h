@@ -39,7 +39,7 @@ public:
    */
   virtual void solve_in_group
   (std::vector<Vector<double> > &sflxes_proc,
-   std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr,
+   std::shared_ptr<EquationBase<dim> > equ_ptr,
    unsigned int &g);
   
 protected:
@@ -83,7 +83,7 @@ public:
    */
   void solve_in_group
   (std::vector<Vector<double> > &sflxes_proc,
-   std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr,
+   std::shared_ptr<EquationBase<dim> > equ_ptr,
    unsigned int &g);
 };
 

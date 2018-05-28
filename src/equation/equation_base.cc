@@ -13,9 +13,9 @@ template <int dim>
 EquationBase<dim>::EquationBase
 (std::string equation_name,
  const ParameterHandler &prm,
- const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
- const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
- const std_cxx11::shared_ptr<MaterialProperties> mat_ptr)
+ const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+ const std::shared_ptr<AQBase<dim> > aqd_ptr,
+ const std::shared_ptr<MaterialProperties> mat_ptr)
 :
 equation_name(equation_name),
 discretization(prm.get("spatial discretization")),
@@ -32,7 +32,7 @@ pcout(std::cout,
   // process input for mesh, AQ and material related data
   process_input (msh_ptr, aqd_ptr, mat_ptr);
   // get cell iterators and booleans to tell if they are at boundary on this process
-  alg_ptr = std_cxx11::shared_ptr<PreconditionerSolver>
+  alg_ptr = std::shared_ptr<PreconditionerSolver>
   (new PreconditionerSolver(prm, equation_name, n_total_vars));
   
   aflxes_proc.resize (n_total_vars);
@@ -46,9 +46,9 @@ EquationBase<dim>::~EquationBase ()
 
 template <int dim>
 void EquationBase<dim>::process_input
-(const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
- const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
- const std_cxx11::shared_ptr<MaterialProperties> mat_ptr)
+(const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+ const std::shared_ptr<AQBase<dim> > aqd_ptr,
+ const std::shared_ptr<MaterialProperties> mat_ptr)
 {
   // mesh related
   {
@@ -97,7 +97,7 @@ void EquationBase<dim>::process_input
 
 template <int dim>
 void EquationBase<dim>::initialize_cell_iterators_this_proc
-(const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
+(const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
  const DoFHandler<dim> &dof_handler)
 {
   msh_ptr->get_relevant_cell_iterators (dof_handler, local_cells);
@@ -138,23 +138,23 @@ template <int dim>
 void EquationBase<dim>::initialize_assembly_related_objects
 (FE_Poly<TensorProductPolynomials<dim>,dim,dim>* fe)
 {
-  q_rule = std_cxx11::shared_ptr<QGauss<dim> > (new QGauss<dim> (p_order + 1));
-  qf_rule = std_cxx11::shared_ptr<QGauss<dim-1> > (new QGauss<dim-1> (p_order + 1));
+  q_rule = std::shared_ptr<QGauss<dim> > (new QGauss<dim> (p_order + 1));
+  qf_rule = std::shared_ptr<QGauss<dim-1> > (new QGauss<dim-1> (p_order + 1));
   
-  fv = std_cxx11::shared_ptr<FEValues<dim> >
+  fv = std::shared_ptr<FEValues<dim> >
   (new FEValues<dim> (*fe, *q_rule,
                       update_values | update_gradients |
                       update_quadrature_points |
                       update_JxW_values));
 
-  fvf = std_cxx11::shared_ptr<FEFaceValues<dim> >
+  fvf = std::shared_ptr<FEFaceValues<dim> >
   (new FEFaceValues<dim> (*fe, *qf_rule,
                           update_values | update_gradients |
                           update_quadrature_points | update_normal_vectors |
                           update_JxW_values));
 
   if (discretization=="dfem")
-    fvf_nei = std_cxx11::shared_ptr<FEFaceValues<dim> >
+    fvf_nei = std::shared_ptr<FEFaceValues<dim> >
     (new FEFaceValues<dim> (*fe, *qf_rule,
                             update_values | update_gradients |
                             update_quadrature_points | update_normal_vectors |
@@ -169,15 +169,15 @@ void EquationBase<dim>::initialize_assembly_related_objects
 
   if (equation_name=="nda")
   {
-    qc_rule = std_cxx11::shared_ptr<QGauss<dim> > (new QGauss<dim> (nda_quadrature_order));
-    qfc_rule = std_cxx11::shared_ptr<QGauss<dim-1> > (new QGauss<dim-1> (nda_quadrature_order));
-    fvc = std_cxx11::shared_ptr<FEValues<dim> >
+    qc_rule = std::shared_ptr<QGauss<dim> > (new QGauss<dim> (nda_quadrature_order));
+    qfc_rule = std::shared_ptr<QGauss<dim-1> > (new QGauss<dim-1> (nda_quadrature_order));
+    fvc = std::shared_ptr<FEValues<dim> >
     (new FEValues<dim> (*fe, *qc_rule,
                         update_values | update_gradients |
                         update_quadrature_points |
                         update_JxW_values));
     
-    fvfc = std_cxx11::shared_ptr<FEFaceValues<dim> >
+    fvfc = std::shared_ptr<FEFaceValues<dim> >
     (new FEFaceValues<dim> (*fe, *qfc_rule,
                             update_values | update_gradients |
                             update_quadrature_points | update_normal_vectors |
@@ -208,7 +208,7 @@ void EquationBase<dim>::assemble_bilinear_form ()
 // TODO: derive a NDA class and override the following function
 template <int dim>
 void EquationBase<dim>::assemble_closure_bilinear_form
-(std_cxx11::shared_ptr<EquationBase<dim> > ho_equ_ptr,
+(std::shared_ptr<EquationBase<dim> > ho_equ_ptr,
  bool do_assembly)
 {
   AssertThrow (equation_name=="nda",

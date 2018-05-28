@@ -4,9 +4,9 @@ template <int dim>
 EvenParity<dim>::EvenParity
 (std::string equation_name,
  const ParameterHandler &prm,
- const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
- const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
- const std_cxx11::shared_ptr<MaterialProperties> mat_ptr)
+ const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+ const std::shared_ptr<AQBase<dim> > aqd_ptr,
+ const std::shared_ptr<MaterialProperties> mat_ptr)
 :
 EquationBase<dim>(equation_name, prm, msh_ptr, aqd_ptr, mat_ptr)
 {

@@ -55,7 +55,7 @@ void BartDriver<dim>::build_basis (ParameterHandler &prm)
   
   // build pointer to Iterations
   pcout << "building iterations" << std::endl;
-  itr_ptr = std_cxx11::shared_ptr<Iterations<dim> > (new Iterations<dim>(prm));
+  itr_ptr = std::shared_ptr<Iterations<dim> > (new Iterations<dim>(prm));
   
   // build pointer to angular quadrature data and make angular quadrature
   pcout << "building AQ data and making aq" << std::endl;
@@ -70,11 +70,11 @@ void BartDriver<dim>::build_basis (ParameterHandler &prm)
   
   // build pointers to mesh constructors and data
   pcout << "building mesh for dim " << dim << std::endl;
-  msh_ptr = std_cxx11::shared_ptr<MeshGenerator<dim> >(new MeshGenerator<dim>(prm));
+  msh_ptr = std::shared_ptr<MeshGenerator<dim> >(new MeshGenerator<dim>(prm));
   
   // build pointers to material data
   pcout << "building materials" << std::endl;
-  mat_ptr = std_cxx11::shared_ptr<MaterialProperties>(new MaterialProperties(prm));
+  mat_ptr = std::shared_ptr<MaterialProperties>(new MaterialProperties(prm));
   
   // initialize finite element space
   if (discretization=="dfem")
@@ -126,69 +126,69 @@ void BartDriver<dim>::report_system ()
 }
 
 template <int dim>
-std_cxx11::shared_ptr<EquationBase<dim> > BartDriver<dim>::build_equation
+std::shared_ptr<EquationBase<dim> > BartDriver<dim>::build_equation
 (std::string equation_name,
  const ParameterHandler &prm,
- const std_cxx11::shared_ptr<MeshGenerator<dim> > msh_ptr,
- const std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr,
- const std_cxx11::shared_ptr<MaterialProperties> mat_ptr)
+ const std::shared_ptr<MeshGenerator<dim> > msh_ptr,
+ const std::shared_ptr<AQBase<dim> > aqd_ptr,
+ const std::shared_ptr<MaterialProperties> mat_ptr)
 {
   // TODO: add NDA to it after having NDA class
-  std_cxx11::shared_ptr<EquationBase<dim> > equ_ptr;
+  std::shared_ptr<EquationBase<dim> > equ_ptr;
   if (equation_name=="ep")
-    equ_ptr = std_cxx11::shared_ptr<EquationBase<dim> >
+    equ_ptr = std::shared_ptr<EquationBase<dim> >
     (new EvenParity<dim> (equation_name, prm, msh_ptr, aqd_ptr, mat_ptr));
   return equ_ptr;
 }
 
 template <int dim>
-std_cxx11::shared_ptr<AQBase<dim> > BartDriver<dim>::build_aq_model
+std::shared_ptr<AQBase<dim> > BartDriver<dim>::build_aq_model
 (ParameterHandler &prm)
 {
   std::string aq_name = prm.get ("angular quadrature name");
   AssertThrow (aq_name!="none",
                ExcMessage("angular quadrature name incorrect or missing"));
   // TODO: add more angular quadratures
-  std_cxx11::shared_ptr<AQBase<dim> > aqd_ptr;
+  std::shared_ptr<AQBase<dim> > aqd_ptr;
   if (aq_name=="lsgc")
   {
     pcout << "constructing lsgc" << std::endl;
-    aqd_ptr = std_cxx11::shared_ptr<AQBase<dim> > (new LSGC<dim>(prm));
+    aqd_ptr = std::shared_ptr<AQBase<dim> > (new LSGC<dim>(prm));
   }
   return aqd_ptr;
 }
 
 template <int dim>
-std_cxx11::shared_ptr<EigenBase<dim> > BartDriver<dim>::build_eigen_iterations
+std::shared_ptr<EigenBase<dim> > BartDriver<dim>::build_eigen_iterations
 (const ParameterHandler &prm)
 {
   // TODO: we only have power iteration now, change later once we need to choose
   // different in group solvers
-  std_cxx11::shared_ptr<EigenBase<dim> > eig_ptr;
-  eig_ptr = std_cxx11::shared_ptr<EigenBase<dim> > (new PowerIteration<dim> (prm));
+  std::shared_ptr<EigenBase<dim> > eig_ptr;
+  eig_ptr = std::shared_ptr<EigenBase<dim> > (new PowerIteration<dim> (prm));
   return eig_ptr;
 }
 
 template <int dim>
-std_cxx11::shared_ptr<MGBase<dim> > BartDriver<dim>::build_mg_iterations
+std::shared_ptr<MGBase<dim> > BartDriver<dim>::build_mg_iterations
 (const ParameterHandler &prm)
 {
   // TODO: fill this up once we have derived class of MGBase
-  std_cxx11::shared_ptr<MGBase<dim> > mg_ptr;
-  mg_ptr = std_cxx11::shared_ptr<MGBase<dim> > (new GaussSeidel<dim> (prm));
+  std::shared_ptr<MGBase<dim> > mg_ptr;
+  mg_ptr = std::shared_ptr<MGBase<dim> > (new GaussSeidel<dim> (prm));
   return mg_ptr;
 }
 
 template <int dim>
-std_cxx11::shared_ptr<IGBase<dim> > BartDriver<dim>::build_ig_iterations
+std::shared_ptr<IGBase<dim> > BartDriver<dim>::build_ig_iterations
 (const ParameterHandler &prm)
 {
   // TODO: we only have source iteration now, change later once we need to choose
   // different in group solvers
-  std_cxx11::shared_ptr<IGBase<dim> > ig_ptr;
+  std::shared_ptr<IGBase<dim> > ig_ptr;
   bool do_nda = prm.get_bool ("do NDA");
   if (!do_nda)
-    ig_ptr = std_cxx11::shared_ptr<IGBase<dim> > (new SourceIteration<dim> (prm));
+    ig_ptr = std::shared_ptr<IGBase<dim> > (new SourceIteration<dim> (prm));
   return ig_ptr;
 }
 
